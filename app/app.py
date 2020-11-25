@@ -109,8 +109,11 @@ def view_address(address_id):
 def change_address(address_id):
     cursor = mysql.get_db().cursor()
     content = request.json
-    sql = "UPDATE addresses SET first_name = %s WHERE id = %s"
-    val = (content['first_name'], address_id)
+    sql = "UPDATE addresses SET first_name = %s, last_name=%s, street=%s, city=%s, state=%s, zip=%s WHERE id = %s"
+    val = (
+        content['first_name'], content['last_name'], content['street'], content['city'], content['state'],
+        content['zip'],
+        address_id)
     cursor.execute(sql, val)
     mysql.get_db().commit()
     resp = Response(status=200, mimetype='application/json')
@@ -121,8 +124,10 @@ def change_address(address_id):
 def new_address():
     cursor = mysql.get_db().cursor()
     content = request.json
-    sql = "INSERT INTO addresses (first_name) VALUES (%s)"
-    val = (content['first_name'])
+    sql = "INSERT INTO addresses (first_name,last_name,street,city,state,zip) VALUES (%s,%s,%s,%s,%s,%s)"
+    val = (
+        content['first_name'], content['last_name'], content['street'], content['city'], content['state'],
+        content['zip'])
     cursor.execute(sql, val)
     mysql.get_db().commit()
     resp = Response(status=200, mimetype='application/json')
