@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>View Address</h2>
+
+    <a href="/">All Addresses</a>
+
+    <div class="card my-3 p-3">
+        <h3 class="card-title">Address</h3>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>First Name:</strong> {{ address['first_name'] }}</li>
+            <li class="list-group-item"><strong>Last Name:</strong> {{ address['last_name'] }}</li>
+            <li class="list-group-item"><strong>Street:</strong> {{ address['street'] }}</li>
+            <li class="list-group-item"><strong>City:</strong> {{ address['city'] }}</li>
+            <li class="list-group-item"><strong>State:</strong> {{ address['state'] }}</li>
+            <li class="list-group-item"><strong>Zip:</strong> {{ address['zip'] }}</li>
+        </ul>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-1">
+                    <a href="/edit/{{ address['id'] }}" class="card-link">Edit</a>
+                </div>
+                <div class="col-1 offset-10">
+                    <form action="/delete/{{ address['id'] }}" method="post">
+                        <a type="submit" class="card-link">Delete</a>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

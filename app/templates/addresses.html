@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Addresses</h2>
+    <table class="table table-borderless table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Street</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+            <th scope="col">Zip</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for address in addresses %}
+            <tr>
+                <td>{{ address['first_name'] }}</td>
+                <td>{{ address['last_name'] }}</td>
+                <td>{{ address['street'] }}</td>
+                <td>{{ address['city'] }}</td>
+                <td>{{ address['state'] }}</td>
+                <td>{{ address['zip'] }}</td>
+                <td>
+                    <a class="btn btn-sm btn-success" href="view/{{ address['id'] }}">View</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary" href="edit/{{ address['id'] }}">Edit</a>
+                </td>
+                <td>
+                    <form action="/delete/{{ address['id'] }}" method="post">
+                        <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-info" href="create">Add New Address</a>
+{% endblock %}
